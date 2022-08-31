@@ -1,0 +1,16 @@
+
+header, #outlineBox {
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 25px;
+    width: 95vw;
+}
+
+#profilbilde {
+    height: 20vh;
+    width: auto;
+}
+
+h1, h2{
+    text-align: center;
+}
