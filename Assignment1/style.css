@@ -1,6 +1,7 @@
 
-header, #outlineBox {
+#topHeader, main > section{
     margin: auto;
+    margin-bottom: 2vh;
     border: 1px solid black;
     border-radius: 25px;
     width: 95vw;
@@ -11,6 +12,40 @@ header, #outlineBox {
     width: auto;
 }
 
+#headerContent {
+    
+}
+
 h1, h2{
     text-align: center;
+}
+
+main > section > section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 2vh;
+}
+
+main > section > section > article {
+    display: inline-block;
+    border: 1px solid black;
+    border-radius: 25px;
+    margin: 2vh;
+    width: 20vw;
+    text-align: center;
+}
+
+
+
+@media screen and (max-width: 768px){
+    main > section > section > article {
+        width: 40vw;
+    }
+}
+
+@media screen and (max-width: 380px){
+    main > section > section > article {
+        width: 450vw;
+    }
 }
