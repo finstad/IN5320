@@ -8,16 +8,37 @@
 }
 
 #profilbilde {
-    height: 20vh;
+    height: 30vh; 
     width: auto;
 }
 
-#headerContent {
-    
+#topHeader > section {
+    display: flex;
+    align-items: center;
+    align-content: stretch;
+    justify-content: space-evenly;
+    border: 1px solid black;
 }
+
+/* figure {
+    flex-grow: 1;
+} */
 
 h1, h2{
     text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    text-align: center;
+    border: 1px solid black;
+    /* flex-grow: 2; */
+}
+
+li {
+    display: inline;
+    font-size: 1.5em;
+    margin: 2vh;
 }
 
 main > section > section {
