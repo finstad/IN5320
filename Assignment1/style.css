@@ -9,20 +9,18 @@
 
 #profilbilde {
     height: 30vh; 
-    width: auto;
+    margin: auto;
 }
 
 #topHeader > section {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    align-content: stretch;
-    justify-content: space-evenly;
-    border: 1px solid black;
 }
 
-/* figure {
-    flex-grow: 1;
-} */
+img {
+    border-radius: 50%;
+}
 
 h1, h2{
     text-align: center;
@@ -31,7 +29,7 @@ h1, h2{
 ul {
     list-style-type: none;
     text-align: center;
-    border: 1px solid black;
+    /* border: 1px solid black; */
     /* flex-grow: 2; */
 }
 
