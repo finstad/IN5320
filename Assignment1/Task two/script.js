@@ -2,7 +2,7 @@
 const btn = document.getElementById('btn');
 const list = document.getElementById("listItem");
 const searchBox = document.getElementById('Search');
-
+ 
 
 btn.addEventListener("click", () => {
     let inputValue = document.querySelector("input[type=text]").value;
@@ -10,9 +10,11 @@ btn.addEventListener("click", () => {
     document.querySelector("input[type=text]").value = "";
 });
 
-const addValue = value => {
+const addValue = async (value) => {
     const newLi = document.createElement("li");
     const newbtn = document.createElement("input");
+    let population = await setPopulation(value);
+    console.log(population);
 
     newbtn.type = "submit";
     newbtn.value = "Delete";
@@ -20,7 +22,8 @@ const addValue = value => {
         removeElement(newLi);
     });
 
-    newLi.appendChild(document.createTextNode(value.toLowerCase() + " "));
+    
+    newLi.appendChild(document.createTextNode(value.toLowerCase() + " " + population + " "));
     newLi.appendChild(newbtn);
     list.appendChild(newLi);
 }
@@ -46,19 +49,27 @@ const listSearch = (list, searchWord) => {
 
 searchBox.addEventListener('input', () => {
     let liValues = Array.from(list.children);
-    let allElements = []; 
+    let allElements = liValues.map(el => el.innerText);
 
-    for (let i = 0; i < liValues.length; i++){
-        allElements.push(liValues[i].innerText);
-        list.removeChild(liValues[i]);
-    }
+    let filteredList = listSearch(allElements, searchBox.value.toLowerCase());
 
-    allElements = listSearch(allElements, searchBox.value.toLowerCase());
-
-    if(allElements.length > 0) {
-        for (let i = 0; i < allElements.length; i++) {
-            addValue(allElements[i]);
+    for (let i = 0; i < liValues.length; i++) {
+        if (filteredList.includes(allElements[i])){
+            liValues[i].style.display = "";
+        } else {
+            liValues[i].style.display = "none";
         }
     }
     
 });
+
+const setPopulation = async (value) => {
+    return fetch('https://d6wn6bmjj722w.population.io:443/1.0/population/'+ value +'/today-and-tomorrow/')
+                .then(response => response.json())
+                .then(data => data.total_population[0].population);
+};
+
+
+
+
+
