@@ -1,7 +1,9 @@
+import React from 'react';
+
 function Table(props) {
 
   const data = props.apiData.results;
-  console.log(data);
+  // console.log(data);
 
 
   

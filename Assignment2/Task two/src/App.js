@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import Table from "./Table.js";
+import SearchBar from "./SearchBar.js";
+import PageSize from "./PageSize.js";
+import PageNumber from "./PageNumber";
 
 function App() {
   /* Create state:
@@ -14,15 +17,9 @@ function App() {
   const [apiData, setApiData] = useState([]);
   const [searchQuery, setSearchQuery] = useState(); // Default = No search query
   const [pageNumber, setPageNumber] = useState(1); //Default = Page 1
+  const [pageSize, setPageSize] = useState(10); //Default = 10
 
-  const changeQuery = (event) => {
-    setSearchQuery(event.target.value);
-  }
 
-  // const sendSearch = () => {
-  //   console.log(searchQuery);
-  //   props.send(searchQuery);
-  // }
 
   useEffect(() => {
     // All parameters are appended to this URL.
@@ -34,7 +31,7 @@ function App() {
     }
 
     // Add what page we are requesting to the API request.
-    apiQuery = apiQuery + "&page=" + pageNumber;
+    apiQuery = apiQuery + "&page=" + pageNumber + "&pageSize=" + pageSize;
 
     // Query data from API.
     console.log("Querying: " + apiQuery);
@@ -44,14 +41,16 @@ function App() {
         // Then add response to state.
         setApiData(data);
       });
-  }, [searchQuery, pageNumber]); // Array containing which state changes that should re-reun useEffect()
+  }, [pageSize, searchQuery, pageNumber]); // Array containing which state changes that should re-reun useEffect()
 
   return (
     <div className="App">
       <h1>Country lookup</h1>
-      <input type="text" onChange={changeQuery}></input>
-      <button>Search</button>
+      <SearchBar setSearchQuery={setSearchQuery}/>
       <Table apiData={apiData} />
+      <PageNumber setPageNumber={setPageNumber}/>
+      <PageSize setPageSize={setPageSize}/>
+      
     </div>
   );
 }
