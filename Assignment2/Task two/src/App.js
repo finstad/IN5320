@@ -18,6 +18,8 @@ function App() {
   const [searchQuery, setSearchQuery] = useState(); // Default = No search query
   const [pageNumber, setPageNumber] = useState(1); //Default = Page 1
   const [pageSize, setPageSize] = useState(10); //Default = 10
+  const [order, setOrder] = useState();
+  const [continentCode, setContinentCode] = useState();
 
 
 
@@ -28,6 +30,14 @@ function App() {
     // If searchQuery isn't empty add &search=searchQuery to the API request.
     if (searchQuery) {
       apiQuery = apiQuery + "&search=" + searchQuery;
+    }
+
+    if (order) {
+      apiQuery = apiQuery + "&order=" + order;
+    }
+
+    if (continentCode) {
+      apiQuery = apiQuery + "&ContinentCode=" + continentCode;
     }
 
     // Add what page we are requesting to the API request.
@@ -41,14 +51,14 @@ function App() {
         // Then add response to state.
         setApiData(data);
       });
-  }, [pageSize, searchQuery, pageNumber]); // Array containing which state changes that should re-reun useEffect()
+  }, [pageSize, searchQuery, pageNumber, order, continentCode]); // Array containing which state changes that should re-reun useEffect()
 
   return (
     <div className="App">
       <h1>Country lookup</h1>
       <SearchBar setSearchQuery={setSearchQuery}/>
-      <Table apiData={apiData} />
-      <PageNumber setPageNumber={setPageNumber}/>
+      <Table apiData={apiData} setOrder={setOrder} order={order} setContinentCode={setContinentCode}/>
+      <PageNumber setPageNumber={setPageNumber} apiData={apiData}/>
       <PageSize setPageSize={setPageSize}/>
       
     </div>

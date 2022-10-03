@@ -2,25 +2,23 @@ import React, { useState } from 'react';
 
 
 function PageSize(props) {
-    const [pageNumber, setPageNumber] = useState(10)
+    const [currentNumber, setCurrentNumber] = useState(10)
 
-    const onChange = event => {
-        setPageNumber(event.target.value);
-        handleChange();
-    }
 
-    const handleChange = () => {
-        // event.preventDefault();
-        props.setPageSize(pageNumber);
+    const handleChange = (event) => {
+        setCurrentNumber(event.target.value)
+        props.setPageSize(event.target.value);
+
     }
 
     return ( 
         <div>
-            <select name="pageSize" value={pageNumber} onChange={onChange}>
-                <option selected value="10">10</option>
-                <option value="20">20</option>
-                <option value="50">50</option>
-            </select>
+            <label for="pageSize">Select table size</label>
+            <select id="pageSize" name="pageSize" value={currentNumber} onChange={handleChange}>
+                <option value={10}>10</option>
+                <option value={20}>20</option>
+                <option value={50}>50</option>
+            </select> 
         </div>
      );
 }

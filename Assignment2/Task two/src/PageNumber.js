@@ -1,23 +1,54 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 function PageNumber(props) {
-    console.log(props);
-    
-    const [page, setPage] = useState(1);
-    console.log(page);
 
-    const nextPage = (event) => {
-        setPage(page + 1)
-        event.preventDefault();
-        props.setPageNumber(page)
+    const pager = props.apiData.pager;
+    
+    //const [page, setPage] = useState(1);
+
+    if (!props.apiData.pager){
+        return <p>Loading...</p>;
+    } else {
+
+        const nextPage = () => {
+            props.setPageNumber(pager.page + 1);
+        }
+
+        const prevPage = () => {
+            props.setPageNumber(pager.page - 1);
+        }
+
+
+        if (pager.page === 1) {
+            return ( 
+                <div>
+                    <label>Page {pager.page} of {pager.pageCount}</label>
+                    <button onClick={nextPage}>Next page</button>
+                </div>
+            );
+        } else if (pager.pageCount === pager.page) {
+            return ( 
+                <div>
+                    <button onClick={prevPage}>Previous page</button>
+                    <label>Page {pager.page} of {pager.pageCount}</label>
+                </div>
+            );
+            
+        } else {
+            return ( 
+                <div>
+                    <button onClick={prevPage}>Previous page</button>
+                    <label>Page {pager.page} of {pager.pageCount}</label>
+                    <button onClick={nextPage}>Next page</button>
+                </div>
+            );
+        }
     }
 
-    return ( 
-        <div>
-            <button>Last page</button>
-            <button onClick={nextPage}>Next page</button>
-        </div>
-     );
+
+
+    
+    
 }
 
 export default PageNumber;
