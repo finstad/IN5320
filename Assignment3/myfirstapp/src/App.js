@@ -2,9 +2,10 @@ import React from "react";
 import classes from "./App.module.css";
 import { useState } from "react";
 
-import { Browse } from "./Browse";
-import { Insert } from "./Insert";
-import { Navigation } from "./Navigation";
+import { Browse } from "./Browse.js";
+import { Insert } from "./Insert.js";
+import { Navigation } from "./Navigation.js";
+import { Datasets } from "./Datasets.js";
 
 function MyApp() {
   const [activePage, setActivePage] = useState("Browse");
@@ -24,6 +25,7 @@ function MyApp() {
       <div className={classes.right}>
         {activePage === "Browse" && <Browse />}
         {activePage === "Insert" && <Insert />}
+        {activePage === "Datasets" && <Datasets />}
       </div>
     </div>
   );
